@@ -7,8 +7,8 @@ from torchvision.datasets import ImageFolder
 path = 'PlantVillege_Datasets'
 datasets = ImageFolder(path)
 dirnames = datasets.classes
-test_rate = 0.1 # if the test_rate = 0.1 means test_set : train_set+val_set = 1 : 9
-val_rate = 0.3  # if the val_rate = 0.3 means train_set : test_set = 7 : 3
+test_ratio = 0.1 # if the test_rate = 0.1 means test_set : train_set+val_set = 1 : 9
+val_ratio = 0.3  # if the val_rate = 0.3 means train_set : test_set = 7 : 3
 # Rename the files
 for dirname in dirnames:
     i = 0
@@ -30,9 +30,9 @@ for dirname in dirnames:
     Start = 0
     allNum = len(os.listdir(path_name))
     End = allNum - 1
-    test_Num = int(allNum * test_rate)
+    test_Num = int(allNum * test_ratio)
     train_val_Num = allNum - test_Num
-    val_Num = int(train_val_Num * val_rate)
+    val_Num = int(train_val_Num * val_ratio)
     train_Num = train_val_Num - val_Num
 
     # Divide for test set
