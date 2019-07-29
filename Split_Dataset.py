@@ -24,6 +24,14 @@ train_path = 'data/train'
 test_path = 'data/test'
 val_path = 'data/val'
 '''
+if(os.path.exists('data') is False):
+    os.mkdir('data')
+if(os.path.exists('data/train') is False):
+    os.mkdir('data/train')
+if(os.path.exists('data/test') is False):
+    os.mkdir('data/test')
+if(os.path.exists('data/val') is False):
+    os.mkdir('data/val')
 
 for dirname in dirnames:
     path_name = os.path.join(path, dirname)
