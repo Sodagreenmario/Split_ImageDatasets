@@ -3,12 +3,19 @@ import sys
 import random
 import shutil
 from torchvision.datasets import ImageFolder
+import argparse
 
-path = 'PlantVillege_Datasets'
+parser = argparse.ArgumentParser()
+parser.add_argument('--Input', type=str, default='data', help='the path of input dirent')
+parser.add_argument('--Output', type=str, default='output', help='the path of output dirent')
+parser.add_argument('--TestRatio', type=double, default=0.1, help='if the test_rate = 0.1 means test_set : train_set+val_set = 1 : 9')
+parser.add_argument('--ValRatio', type=double, default=0.3, help='if the val_rate = 0.3 means train_set : test_set = 7 : 3')
+
+path = parser.Input
 datasets = ImageFolder(path)
 dirnames = datasets.classes
-test_ratio = 0.1 # if the test_rate = 0.1 means test_set : train_set+val_set = 1 : 9
-val_ratio = 0.3  # if the val_rate = 0.3 means train_set : test_set = 7 : 3
+test_ratio = parser.TestRatio
+val_ratio = parser.ValRatio
 # Rename the files
 for dirname in dirnames:
     i = 0
@@ -68,7 +75,7 @@ for dirname in dirnames:
         for index in vars()[target + '_Index']:
             # os.rename(os.path.join(path_name, item), os.path.join(path_name, (str(i)+'.JPG')))
             src_path = os.path.join(path_name, (str(index) + '.JPG'))
-            des_dir = os.path.join(os.path.join(os.path.join(os.getcwd(), 'data'), target), dirname)
+            des_dir = os.path.join(parser.Output, 'data', target, dirname)
             if os.path.isdir(des_dir) == False:
                 os.mkdir(des_dir)
             des_path = os.path.join(des_dir, (dirname + str(index) + '.JPG'))
